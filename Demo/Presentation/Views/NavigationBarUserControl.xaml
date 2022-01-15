@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Demo.Presentation.Views.NavigationBarUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Demo.Presentation.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             xmlns:converters="clr-namespace:Demo.Presentation.Extensions.Converters"
+             DataContext="{Binding Source={StaticResource Locator}, Path=NavigationBar}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:AvatarIdToImageSourceConverter x:Key="AvatarIdToImageSourceConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <materialDesign:ColorZone Mode="PrimaryMid" Padding="16">
+            <Grid Height="32">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Grid.ColumnSpan="4" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Header, Mode=OneWay}" Margin="0,3,0,2"/>
+                <StackPanel Orientation="Horizontal">
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <materialDesign:Chip Content="{Binding LoggedInUser.Name, Mode=OneWay}" MinWidth="100" Height="Auto" HorizontalAlignment="Stretch" Margin="10,0"
+                                         Visibility="{Binding IsUserLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                         Command="{Binding LogoutCommand}">
+                        <materialDesign:Chip.Icon>
+                            <Image RenderOptions.BitmapScalingMode="Fant" Source="{Binding LoggedInUser.AvatarId, Converter={StaticResource AvatarIdToImageSourceConverter}}"/>
+                        </materialDesign:Chip.Icon>
+                    </materialDesign:Chip>
+                    <materialDesign:Chip Content="INICIAR SESIÓN" Margin="10,0" TextBlock.TextAlignment="Center" MinWidth="120"
+                                         Background="#7f54c9"
+                                         Visibility="{Binding IsUserLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=True}"
+                                          Command="{Binding LoginCommand}">
+                    </materialDesign:Chip>
+                    <Button Command="{Binding GoToRequestsCommand}" Visibility="Collapsed">
+                        <materialDesign:PackIcon Kind="UserSupervisor"/>
+                    </Button>
+                    <Button Command="{Binding GoToAdministrationCommand}" Visibility="Collapsed">
+                        <materialDesign:PackIcon Kind="PersonKey"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </materialDesign:ColorZone>
+    </Grid>
+</UserControl>

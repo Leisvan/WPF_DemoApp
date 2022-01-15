@@ -1,0 +1,31 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Demo.Presentation.Views"
+             xmlns:materialDesignMahApps="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:Extensions="clr-namespace:Demo.Presentation.Extensions" x:Class="Demo.Presentation.Views.LoginUserControl"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Thickness x:Key="HeadedFieldsMargin">5,5,5,25</Thickness>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Margin="16,16,16,16" MaxWidth="200">
+            <TextBlock Text="Inicie sesión con su usuario y contraseña"
+                       TextAlignment="Center"
+                       Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                       TextWrapping="Wrap"/>
+            <TextBox materialDesignMahApps:HintAssist.Hint="Usuario"
+                     Margin="0, 10"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged"/>
+
+            </TextBox>
+            <PasswordBox x:Name="passBox" materialDesignMahApps:HintAssist.Hint="Contraseña"
+                         PasswordChanged="PasswordBox_PasswordChanged"
+                         Margin="0, 10"
+                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+
+        </StackPanel>
+    </Grid>
+</UserControl>

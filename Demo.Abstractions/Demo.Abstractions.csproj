@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D1F076DC-72FB-4533-A9CF-166EDF0414D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Demo.Abstractions</RootNamespace>
+    <AssemblyName>Demo.Abstractions</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppServices\IAppUserAppService.cs" />
+    <Compile Include="AppServices\IEntityManagerAppService.cs" />
+    <Compile Include="AppServices\IRequestAppService.cs" />
+    <Compile Include="AppServices\IWorkplaceAppService.cs" />
+    <Compile Include="Common\Check.cs" />
+    <Compile Include="Common\EntityOperation.cs" />
+    <Compile Include="Domain\Entities\AppUserType.cs" />
+    <Compile Include="Domain\Entities\IEntity.cs" />
+    <Compile Include="Domain\Entities\IRequest.cs" />
+    <Compile Include="Domain\Entities\IAppUser.cs" />
+    <Compile Include="Domain\Entities\IWorkplace.cs" />
+    <Compile Include="Domain\Entities\RequestState.cs" />
+    <Compile Include="Domain\Repositories\IAppUserRepository.cs" />
+    <Compile Include="Domain\Repositories\IRepository.cs" />
+    <Compile Include="Domain\Repositories\IRequestRepository.cs" />
+    <Compile Include="Domain\Repositories\IWorkplaceRepository.cs" />
+    <Compile Include="Domain\Services\IAppUserDomainService.cs" />
+    <Compile Include="Domain\Services\IDomainService.cs" />
+    <Compile Include="Domain\Services\IWorkplaceDomainService.cs" />
+    <Compile Include="Domain\Services\RequestDomainService.cs" />
+    <Compile Include="Infrastructure\DataStorageExtensions.cs" />
+    <Compile Include="Infrastructure\IDataStorage.cs" />
+    <Compile Include="Presentation\INavigationTarget.cs" />
+    <Compile Include="Presentation\Services\IDialogService.cs" />
+    <Compile Include="Presentation\Services\IMessageService.cs" />
+    <Compile Include="Presentation\Services\INavigationService.cs" />
+    <Compile Include="Presentation\Services\IValidationControl.cs" />
+    <Compile Include="Presentation\Services\MessageType.cs" />
+    <Compile Include="Presentation\ViewModels\IEntityViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
