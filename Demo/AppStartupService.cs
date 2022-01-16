@@ -13,9 +13,11 @@ using Demo.Infrastructure;
 using Demo.Presentation.ViewModels;
 using Demo.Presentation.Views;
 using Demo.Sample.Infrastructure;
+using Microsoft.Extensions.Configuration;
 using Prism.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,12 +34,14 @@ namespace Demo
         private ILogger _logger;
         private UnityContainer _container;
         private ShellWindow _shell;
+        private IConfiguration _config;
 
         public void Run()
         {
             _container = new UnityContainer();
             _logger = new AggregateLogger();
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            InitializeConfiguration();
 
             InitializeContainer();
             SetupDependencies();
@@ -62,6 +66,7 @@ namespace Demo
             //TODO: Remove in production:
             DemoData.AddDemoData();
 
+            _container.RegisterInstance(_config);
             //Domain Entities
             _container.RegisterType<IAppUser, AppUser>();
             _container.RegisterType<IRequest, Request>();
@@ -110,6 +115,14 @@ namespace Demo
             _shell.NavigateTo(typeof(HomeViewModel), null);
             _shell.Show();
 
+        }
+        private void InitializeConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", false, true);
+
+            _config = builder.Build();
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

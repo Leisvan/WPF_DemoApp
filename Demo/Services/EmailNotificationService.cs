@@ -1,4 +1,6 @@
-﻿using Demo.Abstractions.Domain.Entities;
+﻿using CommonServiceLocator;
+using Demo.Abstractions.Domain.Entities;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,34 +13,47 @@ namespace Demo.Services
 {
     public static class EmailNotificationService
     {
-        private const string SOURCE_ADDRESS = "demojobapp20@gmail.com";
-        private const string SOURCE_PASSWORD = "La9naSinfonia";
-        private const string SMTP_HOST = "smtp.gmail.com";
-        private const int SMTP_PORT = 587;
         private const int SMTP_TIMEOUT = 20000;
 
         private const string DEFAULT_SUBJECT = "Oficina de Empleos";
 
+        public static bool CheckEmailConfig(string address, string pass, string host, int port)
+        {
+            return string.IsNullOrWhiteSpace(address)
+                && string.IsNullOrWhiteSpace(pass)
+                && string.IsNullOrWhiteSpace(host)
+                && port > 0;
+        }
         public static async Task<bool> SendEmailAsync(string body, string emailAddress, string subject = DEFAULT_SUBJECT)
         {
             return await Task.Run(() =>
             {
+                var config = ServiceLocator.Current.GetInstance<IConfiguration>();
                 try
                 {
-                    MailMessage message = new MailMessage();
-                    SmtpClient smtp = new SmtpClient();
-                    message.From = new MailAddress(SOURCE_ADDRESS);
-                    message.To.Add(new MailAddress(emailAddress));
-                    message.Subject = subject;
-                    message.Body = body;
-                    smtp.Port = SMTP_PORT;
-                    smtp.Host = SMTP_HOST;
-                    smtp.EnableSsl = true;
-                    smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = new NetworkCredential(SOURCE_ADDRESS, SOURCE_PASSWORD);
-                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    smtp.Timeout = SMTP_TIMEOUT;
-                    smtp.Send(message);
+                    var address = config["Address"];
+                    var password = config["Password"];
+                    var host = config["Host"];
+                    int port = 0;
+                    int.TryParse(config["Port"], out port);
+                    if (CheckEmailConfig(address, password, host, port))
+                    {
+                        MailMessage message = new MailMessage();
+                        SmtpClient smtp = new SmtpClient();
+                        message.From = new MailAddress(address);
+                        message.To.Add(new MailAddress(emailAddress));
+                        message.Subject = subject;
+                        message.Body = body;
+                        smtp.Port = port;
+                        smtp.Host = host;
+                        smtp.EnableSsl = true;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new NetworkCredential(address, password);
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        smtp.Timeout = SMTP_TIMEOUT;
+                        smtp.Send(message);
+                        return false;
+                    }
                     return true;
                 }
                 catch (Exception)
@@ -49,6 +64,7 @@ namespace Demo.Services
             
         }
     }
+
 
     public static class EmailTemplates
     {
