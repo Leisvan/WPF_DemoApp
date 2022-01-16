@@ -27,7 +27,7 @@
             <ListView.View>
                 <GridView AllowsColumnReorder="False">
                     <GridViewColumn DisplayMemberBinding="{Binding CompanyName}" Header="Compañía" Width="260"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Occupation}" Header="Plaza" Width="220"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Occupation}" Header="Posición" Width="220"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Notes}" Header="Notas"/>
                 </GridView>
             </ListView.View>

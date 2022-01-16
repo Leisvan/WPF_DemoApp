@@ -162,10 +162,10 @@
                                                  Visibility="{Binding State, Converter={StaticResource ObjectValueToVisibilityConverter}, ConverterParameter={x:Static absmodels:RequestState.Accepted}}">
                                 <Grid Margin="16,8">
                                     <StackPanel Orientation="Vertical">
-                                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}" Text="PLAZA ASIGNADA" HorizontalAlignment="Center" FontWeight="DemiBold"/>
+                                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}" Text="VACANTE ASIGNADA" HorizontalAlignment="Center" FontWeight="DemiBold"/>
                                         <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}" Text="Compañía:" Margin="5,5,5,0"/>
                                         <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Text="{Binding Workplace.CompanyName}" Margin="5,0"/>
-                                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}" Text="Plaza:" Margin="5,5,5,0"/>
+                                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}" Text="Puesto:" Margin="5,5,5,0"/>
                                         <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Text="{Binding Workplace.Occupation}" Margin="5,0"/>
                                         <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}" Text="Observaciones:" Margin="5,5,5,0"/>
                                         <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Text="{Binding Workplace.Notes}" TextWrapping="Wrap" Margin="5,0"/>

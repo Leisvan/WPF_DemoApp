@@ -24,7 +24,7 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <TextBox materialDesign:HintAssist.Hint="Plaza" 
+            <TextBox materialDesign:HintAssist.Hint="Puesto" 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      Margin="{StaticResource HeadedFieldsMargin}"
                      MinWidth="150">
